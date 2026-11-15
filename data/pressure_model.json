@@ -1,0 +1,165 @@
+{
+ "what": "Pressure = leverage. LI(s) = swing(s) / mean swing over live balls, swing(s) = sum over 10 next-ball outcomes o of p(o|s) * |WP*(after o) - WP*(s)|.",
+ "pressure_rule": "A ball is a pressure ball when it is live (win probability between 0.02 and 0.98) and LI >= 1.2073 (the 80th percentile of live balls, pooled over both innings).",
+ "cutoff_LI": 1.207326205963144,
+ "cutoff_percentile": 80,
+ "median_LI": 0.8335878476145031,
+ "p95_LI": 1.9953801600869718,
+ "mean_swing_live": 0.014413761075135109,
+ "live_low": 0.02,
+ "live_high": 0.98,
+ "outcome_classes": [
+  "W",
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "6",
+  "wd/nb 1",
+  "wd/nb 2",
+  "wd/nb 3+"
+ ],
+ "class_runs": [
+  0.0,
+  0.0,
+  1.0,
+  2.0,
+  3.0,
+  4.0,
+  6.0,
+  1.0,
+  2.0,
+  5.0
+ ],
+ "engine": {
+  "next_ball_model": "multinomial logistic regression, 10 outcome classes; features: over band, wickets lost, required-rate band (chase), venue scoring level, competition group, impact-player rule",
+  "win_probability": "exact backward induction over match states, then recalibrated: WP* = logistic(a + c * logit(WP_raw))",
+  "recalibration": {
+   "innings1": {
+    "a": -0.04678074380613497,
+    "c": 0.7331756319007178
+   },
+   "innings2": {
+    "a": 0.15257516659013293,
+    "c": 0.8041842775389051
+   }
+  },
+  "monotone_projection_chase": true
+ },
+ "reference_context": {
+  "group": 0,
+  "group_name": "IPL",
+  "tier": 1,
+  "tier_name": "medium-scoring venue",
+  "impact": 1,
+  "impact_name": "impact-player era (2023 onward)"
+ },
+ "presets": [
+  {
+   "label": "Chase begins",
+   "rule": "first ball of a chase at the median target in the reference context",
+   "innings": 2,
+   "balls_left": 120,
+   "wickets_lost": 0,
+   "runs_required": 178,
+   "match_id": 20203
+  },
+  {
+   "label": "A typical pressure ball",
+   "rule": "the pressure ball whose leverage is the median among pressure balls",
+   "innings": 2,
+   "balls_left": 43,
+   "wickets_lost": 1,
+   "runs_required": 73,
+   "match_id": 31263
+  },
+  {
+   "label": "The tightest moment",
+   "rule": "the highest-leverage ball in the reference context",
+   "innings": 2,
+   "balls_left": 1,
+   "wickets_lost": 6,
+   "runs_required": 4,
+   "match_id": 20232
+  },
+  {
+   "label": "Late but settled",
+   "rule": "a non-pressure live ball with 30 or fewer balls left, median leverage",
+   "innings": 2,
+   "balls_left": 24,
+   "wickets_lost": 5,
+   "runs_required": 70,
+   "match_id": 31261
+  }
+ ],
+ "tables": {
+  "file": "pressure_tables.bin.gz",
+  "encoding": "gzip of a byte-shuffled little-endian uint16 buffer: all high bytes, then all low bytes",
+  "scale": {
+   "LI": 1000,
+   "WP": 10000
+  },
+  "layout": [
+   {
+    "name": "LI2",
+    "len": 240000,
+    "shape": [
+     120,
+     10,
+     200
+    ],
+    "index": "((balls_left-1)*10 + wickets_lost)*200 + (runs_required-1)"
+   },
+   {
+    "name": "WP2",
+    "len": 240000,
+    "shape": [
+     120,
+     10,
+     200
+    ],
+    "index": "same as LI2"
+   },
+   {
+    "name": "LI1",
+    "len": 313200,
+    "shape": [
+     120,
+     10,
+     261
+    ],
+    "index": "((balls_left-1)*10 + wickets_lost)*261 + score"
+   },
+   {
+    "name": "WP1",
+    "len": 313200,
+    "shape": [
+     120,
+     10,
+     261
+    ],
+    "index": "same as LI1"
+   }
+  ],
+  "ranges": {
+   "balls_left": [
+    1,
+    120
+   ],
+   "wickets_lost": [
+    0,
+    9
+   ],
+   "runs_required": [
+    1,
+    200
+   ],
+   "score_innings1": [
+    0,
+    260
+   ]
+  }
+ },
+ "note": "The pipeline's pressure score is the output of a fitted win-probability model, so it cannot be written as a short closed formula. The page evaluates it by looking up the pipeline's own value for each exact match state in the reference context."
+}

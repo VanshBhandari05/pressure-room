@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pressure Room: who delivers when it matters</title>
+<meta name="description" content="An independent SupeRR Selector Season 2 entry: every ball of IPL and T20I cricket from 2022 on, rated by how much it could swing the result, and the top 10 batters and bowlers under pressure.">
+<meta name="theme-color" content="#0B1740">
+<meta property="og:title" content="The Pressure Room">
+<meta property="og:description" content="Who delivers when the chase gets tight? Interactive evidence for the top 10 batters and bowlers under pressure.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/teko-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/charts.css">
+</head>
+<body>
+<a class="skip" href="#pick">Skip to the content</a>
+
+<header class="ticker" role="banner">
+  <span id="logo" aria-hidden="true"></span>
+  <span class="over num" id="over-label" aria-live="off">Over <b>0.0</b></span>
+  <nav id="nav" aria-label="Sections"></nav>
+  <span class="gauge-mini" role="img" aria-label="Pressure gauge: fills as you scroll deeper"><i id="gauge-fill"></i></span>
+  <span class="bar" id="ticker-bar"></span>
+</header>
+<div class="filters" id="filters" role="region" aria-label="Filters for the map, head to head and explorer"><div class="wrap" id="filters-ui"></div></div>
+
+<main id="main">
+<!-- 1. HERO -->
+<section class="hero" id="hero" aria-labelledby="h1">
+  <div class="art" id="hero-art" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="kicker">SupeRR Selector Season 2 &middot; Round 1</div>
+    <h1 id="h1">The <em>Pressure</em> Room</h1>
+    <p class="claim">Eighteen needed off six. Who do you want at the crease? We rated every ball of <b><span data-b="meta.matches_clean"></span></b> IPL and T20I matches by how much it could swing the result, then ranked the batters and bowlers who deliver when it matters.</p>
+    <div id="hero-fail"></div>
+    <div class="counters" id="counters" role="list"></div>
+    <div class="teasers" id="teasers"></div>
+  </div>
+  <a class="cue" href="#pick">Enter the Pressure Room<span></span></a>
+</section>
+
+<!-- 2. PICK -->
+<section class="sec" id="pick" aria-labelledby="h-pick">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">The last over</div><h2 id="h-pick">Pick your finisher</h2>
+      <p class="bigq">Eighteen needed off six. <b>Who do you want on strike?</b> Who bowls it?</p>
+      <p class="lede">Choose one batter and one bowler from the players who qualified. We will remember your choice and show where the model ranks them at the end.</p></div>
+    <div id="pick-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 3. WHAT IS PRESSURE -->
+<section class="sec alt" id="pressure" aria-labelledby="h-pressure">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Definition</div><h2 id="h-pressure">What is pressure?</h2>
+      <p class="lede">A ball is a pressure ball when what happens on it can swing the result a lot. For every ball we ask the model how likely each outcome is (dot, one, two, three, four, six, a wicket, and three kinds of wide or no-ball), work out the win probability after each, and take the expected swing. Divide by the average swing over live balls and you have the pressure score, called leverage.</p></div>
+    <div class="inputs rv">
+      <div class="panel"><h4>Runs needed and balls left</h4><p>The required rate and the stage of the innings decide how far one boundary or one wicket moves the chase.</p></div>
+      <div class="panel"><h4>Wickets in hand</h4><p>With few wickets left, one dismissal can end the chase; with many, the same ball hardly matters.</p></div>
+      <div class="panel"><h4>Which innings</h4><p>The model works in the first innings as well, in the same unit as the chase, so the two are comparable.</p></div>
+      <div class="panel"><h4>Context</h4><p>Venue scoring level, IPL or T20I, and the impact-player rule shape what is normal, so they enter the next-ball model.</p></div>
+    </div>
+    <div class="formula rv" id="formula-box" role="note"></div>
+    <p class="note" id="pressure-rule" style="margin-top:10px"></p>
+    <h3 class="chart-title" style="margin:26px 0 12px;font-size:1.9rem">Try it: set the situation and watch the gauge</h3>
+    <p class="how">How to read this: the needle shows the pressure score of the next ball. Blue means ordinary, pink means pressure, and the white tick marks the cutoff the whole analysis uses. The score comes from a lookup of the pipeline's own value for that exact state.</p>
+    <div id="meter-ui"></div>
+  </div>
+</section>
+
+<!-- 4. WHERE PRESSURE LIVES -->
+<section class="sec" id="where" aria-labelledby="h-where">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">The shape of a match</div><h2 id="h-where">Where pressure lives</h2>
+      <p class="lede">Pressure is not spread evenly. It gathers where the result is still open and the margin for error is thin. <span id="where-facts"></span></p></div>
+    <div id="where-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 5. PRESSURE CHANGES THE GAME -->
+<section class="sec alt" id="changes" aria-labelledby="h-changes">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Proof</div><h2 id="h-changes">Pressure changes the game</h2>
+      <p class="lede">If our definition picks out real pressure, play should look different on those balls. It does: batters attack more, bowlers reach for yorkers and slower balls, and the outcomes move. Blue always means normal conditions, pink always means pressure.</p></div>
+    <div id="changes-ui"></div>
+  </div>
+</section>
+
+<!-- 6. HOW A PLAYER IS RATED -->
+<section class="sec" id="rating" aria-labelledby="h-rating">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Method</div><h2 id="h-rating">How a player is rated</h2>
+      <p class="lede">Three steps: a baseline, a pressure performance, and an adjusted rating. Every ball is valued by the win probability it added, split between batter and bowler, and one regression per role compares each player with the opposition they actually faced.</p></div>
+    <div id="rating-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 7. THE RANKINGS -->
+<section class="sec alt" id="rankings" aria-labelledby="h-rank">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">The finish</div><h2 id="h-rank">The rankings</h2>
+      <p class="lede">The submitted top 10 batters and top 10 bowlers, counted down from 10 to 1. These lists are copied straight from the pipeline and never change with any filter on this page.</p></div>
+    <div id="rank-ui"></div>
+  </div>
+</section>
+
+<!-- 9. THE FULL MAP -->
+<section class="sec" id="map" aria-labelledby="h-map">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">In context</div><h2 id="h-map">The full map</h2>
+      <p class="lede">The top 10 against everyone who qualified. Use the filter bar above to change role, competition, seasons or the minimum number of pressure balls. Click any dot for the player card.</p></div>
+    <div id="map-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 10. HEAD TO HEAD -->
+<section class="sec alt" id="h2h" aria-labelledby="h-h2h">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Settle the argument</div><h2 id="h-h2h">Head to head</h2>
+      <p class="lede">Put any two players side by side across every measure. The one-line verdict is generated from the numbers, including whether the gap is bigger than resampling noise.</p></div>
+    <div id="h2h-ui"></div>
+  </div>
+</section>
+
+<!-- 11. SURPRISES -->
+<section class="sec" id="omit" aria-labelledby="h-omit">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Talking points</div><h2 id="h-omit">Surprises and omissions</h2>
+      <p class="lede">Unexpected names in the top 10, and strong names outside it, each with the number that explains why.</p></div>
+    <div id="omit-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 12. THE PRESSURE XI -->
+<section class="sec alt" id="xi" aria-labelledby="h-xi">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Team sheet</div><h2 id="h-xi">The Pressure XI</h2>
+      <p class="lede">If the model picked the side for a tight chase, this is the eleven.</p></div>
+    <div id="xi-ui"></div>
+  </div>
+</section>
+
+<!-- 13. CAN YOU TRUST IT -->
+<section class="sec" id="trust" aria-labelledby="h-trust">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Stress test</div><h2 id="h-trust">Can you trust it?</h2>
+      <p class="lede">We moved the pressure line, split the data by season and by competition, and shuffled the matches. Here is what held and what did not.</p></div>
+    <div id="trust-ui"></div>
+    <h3 class="chart-title" style="margin:40px 0 10px;font-size:2rem">What if pressure started here?</h3>
+    <div id="explorer-ui"></div>
+  </div>
+</section>
+<div class="stitch" aria-hidden="true"></div>
+
+<!-- 14. LIMITS -->
+<section class="sec alt" id="limits" aria-labelledby="h-limits">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">Honesty</div><h2 id="h-limits">Limits</h2>
+      <p class="lede">Where the model is less certain.</p></div>
+    <div id="limits-ui"></div>
+  </div>
+</section>
+
+<!-- 15. YOUR PICK, REVISITED -->
+<section class="sec" id="revisit" aria-labelledby="h-revisit">
+  <div class="wrap">
+    <div class="sec-head rv"><div class="kicker">The result</div><h2 id="h-revisit">Your pick, revisited</h2>
+      <p class="lede">You chose a finisher at the start. Here is where the model puts them.</p></div>
+    <div id="revisit-ui"></div>
+  </div>
+</section>
+</main>
+
+<!-- 16. FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="brand">The Pressure Room</div>
+    <p>An entry by <b>Vansh Bhandari</b> for SupeRR Selector Season 2, Round 1: rank the top 10 batters and top 10 bowlers under pressure.</p>
+    <p>Data: IPL and T20I ball-by-ball and supporting files from 2022 onward, supplied by the organisers. Only small derived aggregates are published here, never the supplied files. Every figure on this page is read from the analysis pipeline's own output.</p>
+    <p><a href="assets/methodology-report.pdf">Read the full methodology report (PDF)</a> &middot; Built <span id="build-date"></span></p>
+    <p>This is an independent hackathon entry. It is not an official Rajasthan Royals or IPL page, and it uses no official logos, crests or player photographs. The pink and blue are a nod to the team's colours; all artwork is original.</p>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+<noscript><p style="padding:24px;position:relative;z-index:9">This page is interactive and needs JavaScript. The methodology report is at <a href="assets/methodology-report.pdf">assets/methodology-report.pdf</a>.</p></noscript>
+</body>
+</html>

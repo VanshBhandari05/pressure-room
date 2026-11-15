@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><link rel="icon" href="data:,"><title>og</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<style>
+ html,body{margin:0;background:#0B1740}
+ #c{position:relative;width:1200px;height:630px;overflow:hidden;background:radial-gradient(120% 90% at 80% 0%,#1d3a96 0%,#0B1740 55%,#060B22 100%);font-family:var(--font-body);color:#FFF6FB}
+ #art{position:absolute;inset:0}
+ #art svg{width:100%;height:100%}
+ .t{position:absolute;left:70px;top:70px}
+ .k{font-family:var(--font-display);letter-spacing:.16em;color:#FF8CC6;font-size:30px;text-transform:uppercase}
+ h1{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:150px;line-height:.95;margin:6px 0 0}
+ h1 em{font-style:normal;color:#EA1A85}
+ p{font-size:30px;max-width:760px;margin:20px 0 0;color:#EEF0FF}
+</style>
+<div id="c"><div id="art"></div><div class="t"><div class="k">SupeRR Selector Season 2 &middot; Round 1</div><h1>The <em>Pressure</em> Room</h1><p>Who delivers when the chase gets tight? Top 10 batters and bowlers, with the evidence.</p></div></div>
+<script type="module">
+import { heroArt } from "../js/art.js";
+document.getElementById("art").append(heroArt());
+document.fonts.ready.then(() => document.body.dataset.ready = "1");
+</script>

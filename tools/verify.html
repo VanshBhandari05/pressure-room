@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><link rel="icon" href="data:,"><title>pressure.js verification</title><body><pre id="out">running</pre>
+<script type="module">
+import * as PR from "../js/pressure.js";
+const out = document.getElementById("out");
+try {
+  const model = await PR.load("../data/");
+  const fx = await (await fetch("pressure_fixture.json")).json();
+  let maxErr = 0, flagOK = 0, wpMax = 0;
+  for (const [inn, b, w, x, li, wp, live, pressure] of fx) {
+    const r = PR.evaluate(inn, b, w, x);
+    maxErr = Math.max(maxErr, Math.abs(r.li - li)); wpMax = Math.max(wpMax, Math.abs(r.wp - wp));
+    if (r.pressure === pressure) flagOK++;
+  }
+  out.textContent = JSON.stringify({ ok: true, n: fx.length, maxLiErr: maxErr, maxWpErr: wpMax, flagAgree: flagOK / fx.length });
+} catch (e) { out.textContent = JSON.stringify({ ok: false, error: String(e) }); }
+</script>

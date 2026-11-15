@@ -1,0 +1,60 @@
+{
+ "build_date": "2026-11-15",
+ "raw_rows": 200999,
+ "raw_matches": 867,
+ "balls_analysed": 193076,
+ "matches_clean": 808,
+ "innings": 1616,
+ "matches_rated": 728,
+ "matches_rated_ipl": 353,
+ "matches_rated_t20i": 375,
+ "seasons": [
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "competitions": 137,
+ "ipl_editions": 5,
+ "live_balls_rated": 156062,
+ "pressure_balls_rated": 31263,
+ "share_pressure_of_live_rated": 0.20032423011367276,
+ "pressure_balls_all": 34494,
+ "share_pressure_of_all": 0.1786550373946011,
+ "live_balls_all": 172466,
+ "eligible_batters": 53,
+ "eligible_bowlers": 56,
+ "ranked_pool_batters": 47,
+ "ranked_pool_bowlers": 48,
+ "players_with_any_rows_batters": 627,
+ "players_with_any_rows_bowlers": 459,
+ "eligibility": {
+  "min_pressure_balls": 120,
+  "min_matches": 15,
+  "active_years": [
+   2025,
+   2026
+  ]
+ },
+ "pressure_cutoff_LI": 1.207326205963144,
+ "live_wp_band": [
+  0.02,
+  0.98
+ ],
+ "params": {
+  "bootstrap_n": 300,
+  "floor_pct": 10,
+  "neg_shift_pct": 90,
+  "pressure_top_pct": 20,
+  "pressure_percentile": 80,
+  "lambda_B": 300,
+  "lambda_C": 3000,
+  "split_half_n": 200,
+  "season_split_year": 2024,
+  "delivery_min_balls": 6,
+  "min_season_balls_shown": 15
+ },
+ "pressure_balls_innings1_rated": 78,
+ "pressure_balls_innings2_rated": 31185
+}

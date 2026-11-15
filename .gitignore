@@ -1,0 +1,16 @@
+# Never publish the organisers' data or large pipeline intermediates
+*.csv
+*.parquet
+*.npz
+*.pkl
+*.xlsx
+ball_by_ball*
+playing_eleven*
+matches*.csv
+outputs/
+data_external/
+# local
+__pycache__/
+*.pyc
+.venv/
+.DS_Store

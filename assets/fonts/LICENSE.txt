@@ -1,0 +1,2 @@
+Teko (c) The Teko Project Authors and Inter (c) The Inter Project Authors are licensed under the SIL Open Font License 1.1 (https://openfontlicense.org).
+The woff2 files here are the Latin subsets distributed by Fontsource (@fontsource/teko 5.1.1, @fontsource/inter 5.1.0) and are self-hosted so the site makes no third-party requests.

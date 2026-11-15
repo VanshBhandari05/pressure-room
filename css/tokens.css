@@ -1,0 +1,34 @@
+/* Design tokens. Colour grammar: BLUE = normal conditions, PINK = pressure. Nothing else is used for data. */
+@font-face{font-family:"Teko";font-weight:500;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Teko";font-weight:600;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Teko";font-weight:700;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-weight:500;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-weight:600;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-weight:700;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-700-normal.woff2") format("woff2")}
+
+:root{
+  --rr-pink:#EA1A85;
+  --rr-pink-soft:#FF8CC6;
+  --rr-blue:#254AA5;
+  --rr-blue-soft:#7C9DF0;      /* tint of the team blue, used for blue text/lines on dark so contrast stays AA */
+  --rr-navy:#0B1740;
+  --rr-ink:#060B22;
+  --paper:#FFF6FB;
+  --muted:#9AA6CF;
+  --panel:#101F52;             /* raised surface, a tint of navy */
+  --panel-2:#16296A;
+  --line:rgba(154,166,207,.22);
+  --focus:#FFD2EA;
+
+  --font-display:"Teko","Barlow Condensed","Arial Narrow",sans-serif;
+  --font-body:"Inter","Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --gutter:16px;
+  --maxw:1120px;
+  --radius:14px;
+  --nav-h:48px;
+  --filter-h:46px;
+  color-scheme:dark;
+}
+@media (min-width:720px){:root{--gutter:28px}}
