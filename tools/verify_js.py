@@ -24,7 +24,8 @@ def launch(p):
     sys.exit("No Chromium-based browser available for playwright.")
 
 
-with socketserver.TCPServer(("127.0.0.1", 0), handler) as srv:
+socketserver.ThreadingTCPServer.daemon_threads = True
+with socketserver.ThreadingTCPServer(("127.0.0.1", 0), handler) as srv:
     port = srv.server_address[1]
     threading.Thread(target=srv.serve_forever, daemon=True).start()
     with sync_playwright() as p:

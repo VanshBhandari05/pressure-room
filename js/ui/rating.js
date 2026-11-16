@@ -24,7 +24,7 @@ export function initRating() {
   function paint() {
     const t = D.top10[role][0], p = D.byKey[(role === "batters" ? "bt" : "bw") + t.id], bat = role === "batters";
     const span = Math.max(p.p90, p.rating, p.baseline) * 1.05;
-    const bar = h("div", { style: { position: "relative", height: "34px", background: "rgba(37,74,165,.3)", borderRadius: "8px", margin: "10px 0 28px" }, role: "img", "aria-label": `Baseline ${f3(p.baseline)} plus shift ${signed(p.shift, 4)} equals rating ${f3(p.rating)}, floor ${f3(p.floor)}` },
+    const bar = h("div", { style: { position: "relative", height: "34px", background: "rgba(0,80,230,.3)", borderRadius: "8px", margin: "10px 0 28px" }, role: "img", "aria-label": `Baseline ${f3(p.baseline)} plus shift ${signed(p.shift, 4)} equals rating ${f3(p.rating)}, floor ${f3(p.floor)}` },
       h("div", { style: { position: "absolute", left: 0, top: 0, bottom: 0, width: (p.baseline / span) * 100 + "%", background: "var(--rr-blue)", borderRadius: "8px 0 0 8px" } }),
       h("div", { style: { position: "absolute", left: (p.baseline / span) * 100 + "%", top: 0, bottom: 0, width: Math.max(0.6, (Math.abs(p.shift) / span) * 100) + "%", background: "var(--rr-pink)", backgroundImage: "repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 2px,transparent 2px 6px)" } }),
       h("div", { style: { position: "absolute", left: (p.floor / span) * 100 + "%", top: "-6px", bottom: "-6px", width: "3px", background: "#fff" } }),

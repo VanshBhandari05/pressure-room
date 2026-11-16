@@ -23,7 +23,7 @@ export function scatter(el, opts) {
       g.append(s("line", { x1: x(lo), y1: y(lo), x2: x(hi), y2: y(hi), stroke: "#fff", "stroke-opacity": 0.7, "stroke-width": 1.5, "stroke-dasharray": "7 5" }),
         s("text", { x: 8, y: 14, fill: "#fff", "font-size": 11, opacity: 0.85 }, "- - -  dashed line: no change under pressure"));
     }
-    (opts.quads || []).forEach((q) => g.append(s("text", { x: q.ax === "r" ? iw - 8 : 8, y: q.ay === "b" ? ih - 10 : 20, "text-anchor": q.ax === "r" ? "end" : "start", fill: "var(--rr-pink-soft)", "font-family": "Teko,sans-serif", "font-size": 22, "letter-spacing": ".06em", opacity: 0.9 }, q.text)));
+    (opts.quads || []).forEach((q) => g.append(s("text", { x: q.ax === "r" ? iw - 8 : 8, y: q.ay === "b" ? ih - 10 : 20, "text-anchor": q.ax === "r" ? "end" : "start", fill: "var(--rr-pink-soft)", "font-family": "Montserrat,Arial,sans-serif", "font-size": 22, "letter-spacing": ".06em", opacity: 0.9 }, q.text)));
     // points: others first, top-10 last so they sit on top
     const order = [...pts].sort((a, b) => (a.top ? 1 : 0) - (b.top ? 1 : 0) || (a.hl ? 1 : 0) - (b.hl ? 1 : 0));
     order.forEach((p) => {
@@ -34,9 +34,9 @@ export function scatter(el, opts) {
       c.addEventListener("click", () => opts.onClick && opts.onClick(p));
       c.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); opts.onClick && opts.onClick(p); } });
       g.append(c);
-      if (p.top || p.hl) g.append(s("text", { x: x(p.x) + r + 3, y: y(p.y) + 4, fill: "#fff", "font-size": 11, "font-weight": 600, "paint-order": "stroke", stroke: "#0B1740", "stroke-width": 3, "pointer-events": "none" }, p.short || p.label));
+      if (p.top || p.hl) g.append(s("text", { x: x(p.x) + r + 3, y: y(p.y) + 4, fill: "#fff", "font-size": 11, "font-weight": 600, "paint-order": "stroke", stroke: "#071678", "stroke-width": 3, "pointer-events": "none" }, p.short || p.label));
     });
-    g.append(s("text", { x: iw / 2, y: ih + 38, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12 }, opts.xLabel),
+    g.append(s("text", { x: iw / 2, y: ih + 38, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12, ...(String(opts.xLabel).length*7.2>iw?{textLength:Math.max(40,iw-6),lengthAdjust:"spacingAndGlyphs"}:{}),  }, opts.xLabel),
       s("text", { x: -ih / 2, y: -42, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12, transform: "rotate(-90)" }, opts.yLabel));
     svg.append(g); el.append(svg);
   });
@@ -60,7 +60,7 @@ export function dumbbell(el, rows, opts = {}) {
       bindTip(grp, () => `<b>${r.label}</b><br><span class="badge-n">Normal</span> ${(opts.fmt || f1)(r.n)}<br><span class="badge-p">Pressure</span> ${(opts.fmt || f1)(r.p)}<br>${r.sub || ""}`);
       grp.addEventListener("click", () => opts.onClick && opts.onClick(r)); grp.addEventListener("keydown", (e) => { if (e.key === "Enter") opts.onClick && opts.onClick(r); });
     });
-    g.append(s("text", { x: iw / 2, y: rows.length * rh + 30, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12 }, opts.xLabel || ""));
+    g.append(s("text", { x: iw / 2, y: rows.length * rh + 30, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12, ...(String(opts.xLabel||"").length*7.2>iw?{textLength:Math.max(40,iw-6),lengthAdjust:"spacingAndGlyphs"}:{}),  }, opts.xLabel || ""));
     svg.append(g); el.append(svg);
   });
 }
@@ -71,7 +71,7 @@ export function bump(el, columns, lines, maxRank = 16, onClick) {
     const m = { l: 34, r: W < 560 ? 108 : 150, t: 30, b: 14 }, rh = 26, H = m.t + maxRank * rh + m.b, iw = W - m.l - m.r;
     const x = linear(0, columns.length - 1, 0, iw), y = (r) => (Math.min(r, maxRank + 0.4) - 0.5) * rh;
     const svg = s("svg", { viewBox: `0 0 ${W} ${H}`, width: W, height: H }), g = s("g", { transform: `translate(${m.l},${m.t})` });
-    g.append(s("rect", { x: -10, y: 0, width: iw + 20, height: 10 * rh, fill: "rgba(234,26,133,.07)", rx: 6 }));
+    g.append(s("rect", { x: -10, y: 0, width: iw + 20, height: 10 * rh, fill: "rgba(229,6,147,.07)", rx: 6 }));
     for (let r = 1; r <= maxRank; r++) g.append(s("text", { x: -14, y: y(r) + 4, "text-anchor": "end", fill: r <= 10 ? "var(--paper)" : "var(--muted)", "font-size": 11 }, String(r)));
     g.append(s("text", { x: -14, y: 10 * rh + 14, "text-anchor": "end", fill: "var(--muted)", "font-size": 10 }, ""));
     columns.forEach((c, i) => g.append(s("text", { x: x(i), y: -12, "text-anchor": "middle", fill: c.main ? "var(--rr-pink-soft)" : "var(--paper)", "font-size": 12, "font-weight": c.main ? 700 : 500 }, W < 560 ? c.short : c.label)));
@@ -82,7 +82,7 @@ export function bump(el, columns, lines, maxRank = 16, onClick) {
       const col = ln.top ? "var(--rr-pink)" : "var(--rr-blue-soft)";
       const grp = s("g", { tabindex: "0", role: "button", style: { cursor: "pointer" }, "aria-label": `${ln.name}: ranks ${pts.map((p) => p.r).join(", ")} across the cutoffs` });
       grp.append(s("polyline", { points: pts.map((p) => `${x(p.i)},${y(p.r)}`).join(" "), fill: "none", stroke: col, "stroke-width": ln.top ? 3 : 2, "stroke-dasharray": ln.top ? "" : "5 4", opacity: ln.top ? 0.95 : 0.7 }));
-      pts.forEach((p) => grp.append(p.r > maxRank ? s("path", { d: `M${x(p.i) - 4} ${y(p.r) - 4} l8 8 m0 -8 l-8 8`, stroke: col, "stroke-width": 2 }) : (ln.top ? s("circle", { cx: x(p.i), cy: y(p.r), r: 5, fill: col, stroke: "#0B1740", "stroke-width": 1.5 }) : s("rect", { x: x(p.i) - 4, y: y(p.r) - 4, width: 8, height: 8, fill: col }))));
+      pts.forEach((p) => grp.append(p.r > maxRank ? s("path", { d: `M${x(p.i) - 4} ${y(p.r) - 4} l8 8 m0 -8 l-8 8`, stroke: col, "stroke-width": 2 }) : (ln.top ? s("circle", { cx: x(p.i), cy: y(p.r), r: 5, fill: col, stroke: "#071678", "stroke-width": 1.5 }) : s("rect", { x: x(p.i) - 4, y: y(p.r) - 4, width: 8, height: 8, fill: col }))));
       const last = pts[pts.length - 1];
       grp.append(s("text", { x: x(last.i) + 10, y: y(last.r) + 4, fill: ln.top ? "#fff" : "var(--rr-blue-soft)", "font-size": 11, "font-weight": ln.top ? 600 : 400 }, ln.short || ln.name));
       bindTip(grp, () => `<b>${ln.name}</b>${ln.top ? " (official top 10)" : " (enters a variant top 10)"}<br>${columns.map((c) => `${c.label}: ${ln.ranks[c.key] ?? "n/a"}`).join("<br>")}`);

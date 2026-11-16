@@ -20,7 +20,7 @@ export function heatmap(el, grid, innings, cut) {
       svg.append(s("text", { x: m.l - 8, y: m.t + w * ch + ch / 2 + 4, "text-anchor": "end", fill: "var(--muted)", "font-size": 11 }, String(w)));
       for (let o = 1; o <= 20; o++) {
         const c = map.get(o + "_" + w), enough = c && c[2] >= minBalls && c[5] != null;
-        const r = s("rect", { x: m.l + (o - 1) * cw + 0.5, y: m.t + w * ch + 0.5, width: cw - 1, height: ch - 1, rx: 3, fill: enough ? pressureColor(c[5], cut) : "rgba(154,166,207,.08)", tabindex: enough ? "0" : null });
+        const r = s("rect", { x: m.l + (o - 1) * cw + 0.5, y: m.t + w * ch + 0.5, width: cw - 1, height: ch - 1, rx: 3, fill: enough ? pressureColor(c[5], cut) : "rgba(197,197,201,.08)", tabindex: enough ? "0" : null });
         if (enough) {
           bindTip(r, () => `<b>Over ${o}, ${w} down</b><br>Average leverage ${f2(c[5])} on ${fmt(c[3])} live balls<br>${pct(c[4] / c[2], 0)} of all ${fmt(c[2])} balls here are pressure balls`);
           r.setAttribute("aria-label", `Over ${o}, ${w} wickets down: average leverage ${f2(c[5])}, ${fmt(c[2])} balls`);
@@ -59,7 +59,7 @@ export function histogram(el, dist, which, innings) {
     g.append(s("line", { x1: x(cut), x2: x(cut), y1: -8, y2: ih, stroke: "#fff", "stroke-width": 2, "stroke-dasharray": "5 4" }),
       s("text", { x: x(cut) + 6, y: 6, fill: "#fff", "font-size": 12, "font-weight": 600 }, `cutoff ${f2(cut)} (top ${dist.top_pct}% of live balls)`));
     ticks(0, 4, 8).forEach((t) => g.append(s("text", { x: x(t), y: ih + 16, "text-anchor": "middle", fill: "var(--muted)", "font-size": 11 }, f1(t) + (t === 4 ? "+" : ""))));
-    g.append(s("text", { x: iw / 2, y: ih + 36, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12 }, "Pressure score of the ball (leverage; 1.0 = average live ball)"));
+    g.append(s("text", { x: iw / 2, y: ih + 36, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12, ...(60*7.2>iw?{textLength:Math.max(40,iw-6),lengthAdjust:"spacingAndGlyphs"}:{}) }, "Pressure score of the ball (leverage; 1.0 = average live ball)"));
     svg.append(g, s("text", { x: 12, y: m.t + ih / 2, "text-anchor": "middle", fill: "var(--paper)", "font-size": 12, transform: `rotate(-90 12 ${m.t + ih / 2})` }, "Balls"));
     el.append(svg);
   });

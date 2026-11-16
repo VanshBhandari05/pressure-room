@@ -9,16 +9,16 @@ const overs = (b) => { const used = 120 - b; return `${Math.floor(used / 6)}.${u
 
 function gaugeSvg() {
   const svg = s("svg", { viewBox: "0 0 300 175", role: "img", "aria-label": "Pressure gauge" });
-  svg.append(s("defs", {}, s("linearGradient", { id: "gg", x1: 0, y1: 0, x2: 1, y2: 0 }, s("stop", { offset: "0", "stop-color": "#254AA5" }), s("stop", { offset: ".3", "stop-color": "#7C9DF0" }), s("stop", { offset: ".31", "stop-color": "#FFC4E2" }), s("stop", { offset: "1", "stop-color": "#EA1A85" }))));
+  svg.append(s("defs", {}, s("linearGradient", { id: "gg", x1: 0, y1: 0, x2: 1, y2: 0 }, s("stop", { offset: "0", "stop-color": "#0050E6" }), s("stop", { offset: ".3", "stop-color": "#7C9DF0" }), s("stop", { offset: ".31", "stop-color": "#FFC4E2" }), s("stop", { offset: "1", "stop-color": "#E50693" }))));
   const cx = 150, cy = 150, r = 120;
   const pt = (t, rad = r) => { const a = Math.PI * (1 - t); return [cx + Math.cos(a) * rad, cy - Math.sin(a) * rad]; };
   const arc = (t0, t1, rad = r) => { const [x0, y0] = pt(t0, rad), [x1, y1] = pt(t1, rad); return `M${x0} ${y0} A${rad} ${rad} 0 0 1 ${x1} ${y1}`; };
-  svg.append(s("path", { d: arc(0, 1), stroke: "rgba(154,166,207,.2)", "stroke-width": 22, fill: "none", "stroke-linecap": "round" }),
+  svg.append(s("path", { d: arc(0, 1), stroke: "rgba(197,197,201,.2)", "stroke-width": 22, fill: "none", "stroke-linecap": "round" }),
     s("path", { id: "g-fill", d: arc(0, 0.001), stroke: "url(#gg)", "stroke-width": 22, fill: "none", "stroke-linecap": "round" }),
     s("g", { id: "g-needle" }, s("line", { x1: cx, y1: cy, x2: cx - r + 14, y2: cy, stroke: "#fff", "stroke-width": 4, "stroke-linecap": "round" }), s("circle", { cx, cy, r: 9, fill: "#fff" })),
-    s("text", { id: "g-val", x: cx, y: cy - 38, "text-anchor": "middle", fill: "#fff", "font-family": "Teko,sans-serif", "font-size": 54, "font-weight": 600 }, "0.00"),
-    s("text", { x: cx, y: cy - 16, "text-anchor": "middle", fill: "#9AA6CF", "font-size": 11 }, "pressure score (leverage)"),
-    s("text", { x: 20, y: 170, fill: "#9AA6CF", "font-size": 11, "text-anchor": "middle" }, "0"), s("text", { x: 282, y: 170, fill: "#9AA6CF", "font-size": 11, "text-anchor": "middle" }, `${MAXLI}+`));
+    s("text", { id: "g-val", x: cx, y: cy - 38, "text-anchor": "middle", fill: "#fff", "font-family": "Montserrat,Arial,sans-serif", "font-size": 54, "font-weight": 600 }, "0.00"),
+    s("text", { x: cx, y: cy - 16, "text-anchor": "middle", fill: "#C5C5C9", "font-size": 11 }, "pressure score (leverage)"),
+    s("text", { x: 20, y: 170, fill: "#C5C5C9", "font-size": 11, "text-anchor": "middle" }, "0"), s("text", { x: 282, y: 170, fill: "#C5C5C9", "font-size": 11, "text-anchor": "middle" }, `${MAXLI}+`));
   svg._set = (li, cut) => {
     const t = clamp(li / MAXLI, 0.004, 1); svg.querySelector("#g-fill").setAttribute("d", arc(0, t));
     svg.querySelector("#g-needle").setAttribute("transform", `rotate(${t * 180} ${cx} ${cy})`);

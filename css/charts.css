@@ -2,7 +2,7 @@
 .pb-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media (min-width:640px){.pb-grid{grid-template-columns:1fr 1fr}}
 @media (min-width:1000px){.pb-grid{grid-template-columns:repeat(3,1fr)}}
-.pb{background:rgba(6,11,34,.5);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.pb{background:rgba(24,24,37,.5);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .pb-title{font-family:var(--font-display);font-size:1.25rem;margin-bottom:6px}
 .pb-title small{font-family:var(--font-body);font-size:.7rem;color:var(--muted);margin-left:6px}
 .pb-row{display:grid;grid-template-columns:62px 1fr 56px;align-items:center;gap:8px;font-size:.78rem;margin:3px 0}
@@ -32,3 +32,6 @@
 .mr .side i.n{background:var(--rr-blue)}
 .mr .side i.p{background:var(--rr-pink);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.5) 0 2px,transparent 2px 7px)}
 .stumps svg{display:block}
+.mr{grid-template-columns:48px minmax(0,1fr) minmax(96px,150px) minmax(0,1fr) 48px}
+.mr .v{font-size:.95rem;font-weight:600}
+@media (max-width:560px){.mr{grid-template-columns:36px minmax(0,1fr) minmax(56px,1fr) minmax(0,1fr) 36px;font-size:.66rem}.mr .lab{overflow-wrap:anywhere}}

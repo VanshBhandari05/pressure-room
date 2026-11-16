@@ -1,28 +1,27 @@
 /* Design tokens. Colour grammar: BLUE = normal conditions, PINK = pressure. Nothing else is used for data. */
-@font-face{font-family:"Teko";font-weight:500;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-500-normal.woff2") format("woff2")}
-@font-face{font-family:"Teko";font-weight:600;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-600-normal.woff2") format("woff2")}
-@font-face{font-family:"Teko";font-weight:700;font-style:normal;font-display:swap;src:url("../assets/fonts/teko-latin-700-normal.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-weight:400;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-400-normal.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-weight:500;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-500-normal.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-weight:600;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-600-normal.woff2") format("woff2")}
-@font-face{font-family:"Inter";font-weight:700;font-style:normal;font-display:swap;src:url("../assets/fonts/inter-latin-700-normal.woff2") format("woff2")}
+
+@font-face{font-family:"Montserrat";font-weight:400;font-style:normal;font-display:swap;src:url("../assets/fonts/montserrat-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:500;font-style:normal;font-display:swap;src:url("../assets/fonts/montserrat-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:600;font-style:normal;font-display:swap;src:url("../assets/fonts/montserrat-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:700;font-style:normal;font-display:swap;src:url("../assets/fonts/montserrat-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Montserrat";font-weight:800;font-style:normal;font-display:swap;src:url("../assets/fonts/montserrat-latin-800-normal.woff2") format("woff2")}
 
 :root{
-  --rr-pink:#EA1A85;
-  --rr-pink-soft:#FF8CC6;
-  --rr-blue:#254AA5;
+  --rr-pink:#E50693;
+  --rr-pink-soft:#E96DB1;
+  --rr-blue:#0050E6;
   --rr-blue-soft:#7C9DF0;      /* tint of the team blue, used for blue text/lines on dark so contrast stays AA */
-  --rr-navy:#0B1740;
-  --rr-ink:#060B22;
-  --paper:#FFF6FB;
-  --muted:#9AA6CF;
-  --panel:#101F52;             /* raised surface, a tint of navy */
-  --panel-2:#16296A;
-  --line:rgba(154,166,207,.22);
+  --rr-navy:#071678;
+  --rr-ink:#181825;
+  --paper:#F6F6F9;
+  --muted:#C5C5C9;
+  --panel:#28293E;             /* raised surface, a tint of navy */
+  --panel-2:#363749;
+  --line:rgba(197,197,201,.22);
   --focus:#FFD2EA;
 
-  --font-display:"Teko","Barlow Condensed","Arial Narrow",sans-serif;
-  --font-body:"Inter","Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-display:"Montserrat","Arial",system-ui,sans-serif;
+  --font-body:"Montserrat","Arial",system-ui,sans-serif;
 
   --gutter:16px;
   --maxw:1120px;

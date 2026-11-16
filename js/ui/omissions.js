@@ -43,13 +43,13 @@ export async function initXI() {
   bowls.forEach((p, i) => (assign[bowlSpots[i]] = { p, kind: "bowl" }));
   restBats.forEach((p) => { const sp = batSpots.find((i) => !assign[i]); assign[sp] = { p, kind: "bat" }; });
   const W = 760, H = 560, svg = s("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "The Pressure XI placed on a cricket field", class: "xi-field" });
-  svg.append(s("ellipse", { cx: W / 2, cy: H / 2, rx: 350, ry: 262, fill: "#0E2263", stroke: "#EA1A85", "stroke-width": 3 }), s("ellipse", { cx: W / 2, cy: H / 2, rx: 220, ry: 165, fill: "none", stroke: "#254AA5", "stroke-width": 2, "stroke-dasharray": "6 6" }),
-    s("rect", { x: W / 2 - 18, y: H / 2 - 92, width: 36, height: 184, fill: "#16296A", stroke: "#FF8CC6", "stroke-width": 1.5, rx: 4 }));
-  for (let a = 0; a < 360; a += 30) { const r = (a * Math.PI) / 180; svg.append(s("line", { x1: W / 2, y1: H / 2, x2: W / 2 + Math.cos(r) * 350, y2: H / 2 + Math.sin(r) * 262, stroke: "#FF8CC6", "stroke-opacity": 0.12 })); }
+  svg.append(s("ellipse", { cx: W / 2, cy: H / 2, rx: 350, ry: 262, fill: "#071678", stroke: "#E50693", "stroke-width": 3 }), s("ellipse", { cx: W / 2, cy: H / 2, rx: 220, ry: 165, fill: "none", stroke: "#0050E6", "stroke-width": 2, "stroke-dasharray": "6 6" }),
+    s("rect", { x: W / 2 - 18, y: H / 2 - 92, width: 36, height: 184, fill: "#363749", stroke: "#E96DB1", "stroke-width": 1.5, rx: 4 }));
+  for (let a = 0; a < 360; a += 30) { const r = (a * Math.PI) / 180; svg.append(s("line", { x1: W / 2, y1: H / 2, x2: W / 2 + Math.cos(r) * 350, y2: H / 2 + Math.sin(r) * 262, stroke: "#E96DB1", "stroke-opacity": 0.12 })); }
   assign.forEach((a, i) => {
     if (!a) return; const [name, px, py] = SPOTS[i], cx = (px / 100) * (W - 120) + 60, cy = (py / 100) * (H - 110) + 40;
     const g = s("g", { transform: `translate(${cx - 32},${cy - 32})`, tabindex: "0", role: "button", style: { cursor: "pointer" }, "aria-label": `${a.p.name}, ${a.kind === "bat" ? "batter" : "bowler"}. Open player card.` });
-    const av = avatar(a.p, 64); av.setAttribute("x", 0); av.setAttribute("y", 0); g.append(av, s("text", { x: 32, y: 82, "text-anchor": "middle", fill: "#fff", "font-size": 12, "font-weight": 600, "paint-order": "stroke", stroke: "#0B1740", "stroke-width": 3 }, a.p.name.split(" ").slice(-1)[0]));
+    const av = avatar(a.p, 64); av.setAttribute("x", 0); av.setAttribute("y", 0); g.append(av, s("text", { x: 32, y: 82, "text-anchor": "middle", fill: "#fff", "font-size": 12, "font-weight": 600, "paint-order": "stroke", stroke: "#071678", "stroke-width": 3 }, a.p.name.split(" ").slice(-1)[0]));
     g.addEventListener("click", () => openPlayer(a.p)); g.addEventListener("keydown", (e) => { if (e.key === "Enter") openPlayer(a.p); });
     svg.append(g);
   });

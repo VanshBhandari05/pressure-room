@@ -56,3 +56,9 @@ Every judgement call, in the order it came up. Nothing here changes the methodol
 - **Shift reliability.** Split-half 0.13 (batters) and 0.15 (bowlers): the lists rank proven quality, not a separate clutch trait.
 - **Rashid Khan** has two ids; the list uses 4722 (check the Unstop dropdown).
 - **Bowler sign check** was amended after results (Hasaranga and Noor Ahmad); the page's limits section says so.
+
+## Rajasthan Royals look (2026-11-16)
+
+32. **Palette and font taken from rajasthanroyals.com's own stylesheet.** Pink `#E50693`, blue `#1226AB` (chart blue `#0050E6` for contrast on dark), dark `#181825` / `#28293E`, page grey `#F6F6F9`, muted `#C5C5C9`, soft pink `#E96DB1`. Font: Montserrat 400-800 (the site's body font; open licence), self-hosted. Their display face (Romagna) is proprietary, so headings use Montserrat 800 in capitals instead. Teko and Inter were removed from use.
+33. **Added:** pink-to-blue angled divider between sections, pink footer rule, uppercase bold section titles. No logos, crests or photos were copied; artwork remains original. Blue = normal and pink = pressure is unchanged.
+34. **Layout fixes for the wider font:** hero title size, ranking cards, comparison rows, teasers and two long chart captions now fit at 360 px with no sideways scroll. `tools/verify_js.py` now uses a threaded test server (harness only; the checks are unchanged). 32 PASS, 0 FAIL.
