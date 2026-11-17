@@ -10,7 +10,7 @@ Not an official Rajasthan Royals or IPL page. No official logos, crests or playe
 index.html            the page
 css/                  tokens.css (colour grammar), layout.css, components.css, charts.css
 js/                   main.js, data.js, state.js, pressure.js, art.js, util.js, charts/*.js, ui/*.js
-assets/               fonts (self-hosted), favicon, og-image, methodology-report.pdf
+assets/               fonts (self-hosted), favicon, og-image
 data/                 every number the page shows (JSON, one gzip table) + CHECKS.md
 build_data.py         regenerates data/ from the pipeline outputs
 tools/                verification scripts and the og-image source (not published)
